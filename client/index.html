@@ -1,0 +1,19 @@
+<head>
+  <title>#FGLSGMConf2014 Tweets</title>
+  <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+
+</head>
+
+<body>
+  {{> tweets}}
+
+	<script>
+		var fb = new Firebase("https://incandescent-fire-9510.firebaseio.com/");
+		
+		function tweet_item(tname, pic, tweet, media, realname) {
+			tweet = tweet.replace(/"/g,"");
+			tweet = tweet.replace(/(\r\n|\n|\r)/gm,"");
+			fb.push({ name:tname, pic:pic, tweet:tweet, media:media, realname:realname });
+		 }
+	</script>
+</body>

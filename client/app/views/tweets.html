@@ -1,0 +1,63 @@
+
+<template name="tweets">
+
+	<div class="ui piled feed segment">
+  		<h2 class="ui header">#FGLTownHall Tweets</h2>
+		
+  		{{#each tweets}}
+  			<div class="event">
+				<div class="label">
+					{{#if retweeted_status}}
+						<i class="circular retweet icon"></i>
+					{{else}}
+						<a href="http://twitter.com/{{user.screen_name}}" title="{{user.name}}">
+		  					<img src="{{user.profile_image_url}}">
+		  				</a>
+		  			{{/if}}
+				</div>
+				<div class="content">
+	
+					<a href="#" onclick='tweet_item( "{{user.screen_name}}", "{{user.profile_image_url}}", "{{text}}", "{{media_url}}", "{{user.name}}" );$(this).children("div.button").addClass("positive");return false;'>
+
+						<div class="mini ui button"><i class="checkmark icon"></i> Approve</div>
+					</a>
+
+	  				<div class="date">{{moments created_at}}</div>
+	  				<div class="summary">
+	  					{{#if retweeted_status}}
+	  						<strong>{{user.name}}</strong> retweeted
+	  					{{else}}
+	  						{{text}}
+	  					{{/if}}
+	  				</div>
+	  				{{#if retweeted_status}}
+	  					<div class="extra text">
+	  						{{text}}
+
+	  						{{#if entities.media}}
+		  					<div class="extra images">
+		  						{{#each entities.media}}
+		  							{{#if isPhoto}}
+										<img src="{{media_url}}" />
+									{{/if}}
+								{{/each}}
+		  					</div>
+		  					{{/if}}
+
+	  					</div>
+	  				{{else}}
+		  				{{#if entities.media}}
+		  					<div class="extra images">
+		  						{{#each entities.media}}
+		  							{{#if isPhoto}}
+										<a href="{{expanded_url}}"><img src="{{media_url}}" /></a>
+									{{/if}}
+								{{/each}}
+		  					</div>
+		  				{{/if}}
+		  			{{/if}}
+				</div>
+  			</div>
+		{{/each}}
+	</div>
+</template>
